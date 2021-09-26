@@ -56,6 +56,19 @@ The `FullStoryExclude`, `FullStoryExcludeWithoutConsent`, `FullStoryMask`,
 `FullStoryUnmaskWithConsent` components control whether or not their children
 are included or excluded from the FullStory recording.
 
+## Integrations
+
+### Segment
+
+To integrate with Segment, visit the Segment website, navigate to Catalog,
+select FullStory, then add your FullStory organization ID.
+
+### Sentry
+
+To integrate with Sentry, visit the Sentry website, navigate to your
+organization settings, to Security & Privacy, to Data Scrubbing, then add
+`fullStoryUrl` to the Global Safe Fields.
+
 ## Contributing
 
 - `yarn set version latest`
