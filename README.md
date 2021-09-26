@@ -1,28 +1,60 @@
-# Node package
+# `<FullStory />`
 
-[![version](https://img.shields.io/npm/v/PACKAGE-NAME.svg)](https://www.npmjs.com/package/PACKAGE-NAME)
-[![minzipped size](https://img.shields.io/bundlephobia/minzip/PACKAGE-NAME.svg)](https://www.npmjs.com/package/PACKAGE-NAME)
-[![downloads](https://img.shields.io/npm/dt/PACKAGE-NAME.svg)](https://www.npmjs.com/package/PACKAGE-NAME)
-[![GitHub Action: Push](https://github.com/CharlesStover/PACKAGE-NAME/actions/workflows/push.yml/badge.svg)](https://github.com/CharlesStover/PACKAGE-NAME/actions/workflows/push.yml)
+[![version](https://img.shields.io/npm/v/fullstory-react.svg)](https://www.npmjs.com/package/fullstory-react)
+[![minzipped size](https://img.shields.io/bundlephobia/minzip/fullstory-react.svg)](https://www.npmjs.com/package/fullstory-react)
+[![downloads](https://img.shields.io/npm/dt/fullstory-react.svg)](https://www.npmjs.com/package/fullstory-react)
+[![GitHub Action: Push](https://github.com/CharlesStover/fullstory-react/actions/workflows/push.yml/badge.svg)](https://github.com/CharlesStover/fullstory-react/actions/workflows/push.yml)
 
-Description
+FullStory integration with React
 
 ## Install
 
-- `npm install package-name` or
-- `yarn add package-name`
+- `npm install fullstory-react` or
+- `yarn add fullstory-react`
 
 ## Use
 
 ```javascript
-import packageName from 'package-name';
+import FullStory from 'fullstory-react';
+import { render } from 'react-dom';
+import { App } from './components';
 
-packageName();
+render(
+  <FullStory orgId="my-org-id">
+    <App />
+  </FullStory>,
+  document.getElementById('root'),
+);
 ```
 
-## API
+## Exports
 
-API
+### `FullStory`
+
+```javascript
+import FullStory from 'fullstory-react';
+```
+
+The `<FullStory />` component accepts as props all the same properties that
+would be passed to the FullStory `init` method.
+
+### Privacy components
+
+```javascript
+import {
+  FulStoryExclude,
+  FulStoryExcludeWithoutConsent,
+  FulStoryMask,
+  FulStoryMaskWithoutConsent,
+  FulStoryUnmask,
+  FulStoryUnmaskWithConsent,
+} from 'fullstory-react';
+```
+
+The `FullStoryExclude`, `FullStoryExcludeWithoutConsent`, `FullStoryMask`,
+`FullStoryMaskWithoutConsent`, `FullStoryUnmask`, and
+`FullStoryUnmaskWithConsent` components control whether or not their children
+are included or excluded from the FullStory recording.
 
 ## Contributing
 

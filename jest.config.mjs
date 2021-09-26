@@ -22,9 +22,6 @@ export default {
       statements: 100,
     },
   },
-  moduleNameMapper: {
-    '\\.(?:css|gif|jpg|png|scss)$': '<rootDir>/test-utils/empty.ts',
-  },
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },
