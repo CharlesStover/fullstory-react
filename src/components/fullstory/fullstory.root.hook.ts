@@ -12,7 +12,7 @@ interface Props {
   readonly script: string | undefined;
   readonly userDisplayName: string | undefined;
   readonly userEmail: string | undefined;
-  readonly userUid: string | undefined;
+  readonly userUid: number | string | undefined;
 }
 
 export default function useFullStory({
@@ -55,7 +55,7 @@ export default function useFullStory({
       return;
     }
 
-    identify(userUid, {
+    identify(userUid.toString(), {
       displayName: userDisplayName,
       email: userEmail,
     });
