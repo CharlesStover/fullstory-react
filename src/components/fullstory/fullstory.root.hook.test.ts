@@ -1,5 +1,7 @@
+const TEST_IDENTIFY = jest.fn();
 const TEST_INIT = jest.fn();
 jest.mock('@fullstory/browser', () => ({
+  identify: TEST_IDENTIFY,
   init: TEST_INIT,
 }));
 
@@ -20,6 +22,9 @@ describe('useFullStory', (): void => {
         recordCrossDomainIFrames: true,
         recordOnlyThisIFrame: true,
         script: 'test-script',
+        userDisplayName: undefined,
+        userEmail: undefined,
+        userUid: undefined,
       },
     });
 
@@ -33,6 +38,34 @@ describe('useFullStory', (): void => {
       recordCrossDomainIFrames: true,
       recordOnlyThisIFrame: true,
       script: 'test-script',
+    });
+  });
+
+  it('should identify', (): void => {
+    const TEST_DISPLAY_NAME = 'test display name';
+    const TEST_EMAIL = 'test@email.com';
+    const TEST_UID = 'test-uid';
+
+    renderHook(useFullStory, {
+      initialProps: {
+        debug: undefined,
+        devMode: undefined,
+        host: undefined,
+        namespace: undefined,
+        orgId: 'test-org-id',
+        recordCrossDomainIFrames: undefined,
+        recordOnlyThisIFrame: undefined,
+        script: undefined,
+        userDisplayName: TEST_DISPLAY_NAME,
+        userEmail: TEST_EMAIL,
+        userUid: TEST_UID,
+      },
+    });
+
+    expect(TEST_IDENTIFY).toHaveBeenCalledTimes(ONCE);
+    expect(TEST_IDENTIFY).toHaveBeenLastCalledWith(TEST_UID, {
+      displayName: TEST_DISPLAY_NAME,
+      email: TEST_EMAIL,
     });
   });
 });

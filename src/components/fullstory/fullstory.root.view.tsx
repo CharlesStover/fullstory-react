@@ -11,6 +11,9 @@ interface Props {
   readonly recordCrossDomainIFrames?: boolean | undefined;
   readonly recordOnlyThisIFrame?: boolean | undefined;
   readonly script?: string | undefined;
+  readonly userDisplayName?: string | undefined;
+  readonly userEmail?: string | undefined;
+  readonly userUid?: string | undefined;
 }
 
 export default function FullStory({
@@ -23,6 +26,9 @@ export default function FullStory({
   recordCrossDomainIFrames,
   recordOnlyThisIFrame,
   script,
+  userDisplayName,
+  userEmail,
+  userUid,
 }: Props): ReactElement {
   useFullStory({
     debug,
@@ -33,6 +39,9 @@ export default function FullStory({
     recordCrossDomainIFrames,
     recordOnlyThisIFrame,
     script,
+    userDisplayName,
+    userEmail,
+    userUid,
   });
 
   return <>{children}</>;

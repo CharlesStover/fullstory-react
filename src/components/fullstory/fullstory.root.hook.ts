@@ -1,5 +1,4 @@
-import type { SnippetOptions } from '@fullstory/browser';
-import { init } from '@fullstory/browser';
+import { identify, init } from '@fullstory/browser';
 import { useEffect } from 'react';
 
 interface Props {
@@ -11,6 +10,9 @@ interface Props {
   readonly recordCrossDomainIFrames: boolean | undefined;
   readonly recordOnlyThisIFrame: boolean | undefined;
   readonly script: string | undefined;
+  readonly userDisplayName: string | undefined;
+  readonly userEmail: string | undefined;
+  readonly userUid: string | undefined;
 }
 
 export default function useFullStory({
@@ -22,38 +24,21 @@ export default function useFullStory({
   recordCrossDomainIFrames,
   recordOnlyThisIFrame,
   script,
+  userDisplayName,
+  userEmail,
+  userUid,
 }: Props): void {
   useEffect((): void => {
-    const options: SnippetOptions = {
+    init({
+      debug,
+      devMode,
+      host,
+      namespace,
       orgId,
-    };
-
-    // This can be simplified when `SnippetOptions` is refactored to support
-    //   TypeScript 4.4's `exactOptionalPropertyTypes`.
-    // https://github.com/fullstorydev/fullstory-browser-sdk/pull/105
-    if (typeof debug !== 'undefined') {
-      options.debug = debug;
-    }
-    if (typeof devMode !== 'undefined') {
-      options.devMode = devMode;
-    }
-    if (typeof host !== 'undefined') {
-      options.host = host;
-    }
-    if (typeof namespace !== 'undefined') {
-      options.namespace = namespace;
-    }
-    if (typeof recordCrossDomainIFrames !== 'undefined') {
-      options.recordCrossDomainIFrames = recordCrossDomainIFrames;
-    }
-    if (typeof recordOnlyThisIFrame !== 'undefined') {
-      options.recordOnlyThisIFrame = recordOnlyThisIFrame;
-    }
-    if (typeof script !== 'undefined') {
-      options.script = script;
-    }
-
-    init(options);
+      recordCrossDomainIFrames,
+      recordOnlyThisIFrame,
+      script,
+    });
   }, [
     debug,
     devMode,
@@ -64,4 +49,15 @@ export default function useFullStory({
     recordOnlyThisIFrame,
     script,
   ]);
+
+  useEffect((): void => {
+    if (typeof userUid === 'undefined') {
+      return;
+    }
+
+    identify(userUid, {
+      displayName: userDisplayName,
+      email: userEmail,
+    });
+  }, [userDisplayName, userEmail, userUid]);
 }

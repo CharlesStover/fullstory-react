@@ -38,6 +38,9 @@ import FullStory from 'fullstory-react';
 The `<FullStory />` component accepts as props all the same properties that
 would be passed to the FullStory `init` method.
 
+To identify your user, you may optionally provider `userUid` (a unique user ID),
+`userDisplayName`, and `userEmail` props.
+
 ### Privacy components
 
 ```javascript
