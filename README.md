@@ -29,7 +29,7 @@ render(
 
 ## Exports
 
-### `FullStory`
+### `<FullStory />`
 
 ```javascript
 import FullStory from 'fullstory-react';
@@ -59,6 +59,17 @@ The `FullStoryExclude`, `FullStoryExcludeWithoutConsent`, `FullStoryMask`,
 `FullStoryUnmaskWithConsent` components control whether or not their children
 are included or excluded from the FullStory recording.
 
+### Hooks
+
+FullStory's methods that are not handled by the `<FullStory />` component can be
+accessed by React hooks.
+
+- `useFullStoryConsent`
+- `useFullStoryEvent`
+- `useFullStoryGetCurrentSessionURL`
+- `useFullStoryLog`
+- `useFullStorySetUserVars`
+
 ## Integrations
 
 ### Segment
@@ -75,6 +86,6 @@ organization settings, to Security & Privacy, to Data Scrubbing, then add
 ## Contributing
 
 - `yarn set version latest`
-- `yarn up * @*/*`
+- `yarn up "*" "@*/*"`
 - If you use VIM, run `yarn sdks vim`.
 - If you use Visual Studio Code, run `yarn sdks vscode`.

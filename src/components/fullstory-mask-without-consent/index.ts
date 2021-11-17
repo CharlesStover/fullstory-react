@@ -1,1 +1,1 @@
-export { default } from './fullstory-mask-without-consent.root.view';
+export { default } from './fullstory-mask-without-consent.view';

@@ -5,3 +5,8 @@ export { default as FullStoryMask } from './components/fullstory-mask';
 export { default as FullStoryMaskWithoutConsent } from './components/fullstory-mask-without-consent';
 export { default as FullStoryUnmask } from './components/fullstory-unmask';
 export { default as FullStoryUnmaskWithConsent } from './components/fullstory-unmask-with-consent';
+export { default as useFullStoryConsent } from './hooks/use-fullstory-consent';
+export { default as useFullStoryEvent } from './hooks/use-fullstory-event';
+export { default as useFullStoryGetCurrentSessionURL } from './hooks/use-fullstory-get-current-session-url';
+export { default as useFullStoryLog } from './hooks/use-fullstory-log';
+export { default as useFullStorySetUserVars } from './hooks/use-fullstory-set-user-vars';

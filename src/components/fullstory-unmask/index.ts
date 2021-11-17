@@ -1,1 +1,1 @@
-export { default } from './fullstory-unmask.root.view';
+export { default } from './fullstory-unmask.view';

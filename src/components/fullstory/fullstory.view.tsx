@@ -1,5 +1,5 @@
 import type { ReactElement, ReactNode } from 'react';
-import useFullStory from './fullstory.root.hook';
+import useFullStory from './fullstory.hook';
 
 interface Props {
   readonly children: ReactNode;

@@ -1,4 +1,5 @@
 {
+  "exclude": ["/.github/", "/.yarn/", "/dist/", "/jest/", "/node_modules/"],
   "include": ["src/**/*"],
 
   "compilerOptions": {
@@ -42,18 +43,5 @@
     "strictPropertyInitialization": true,
     "suppressImplicitAnyIndexErrors": false,
     "target": "ES5"
-  },
-
-  "exclude": [
-    "/.github/",
-    "/.yarn/",
-    "/dist/",
-    "/jest/",
-    "/node_modules/",
-    "/types/",
-    "**/test-utils/*.ts",
-    "**/test-utils/*.tsx",
-    "**/*.test.ts",
-    "**/*.test.tsx"
-  ]
+  }
 }

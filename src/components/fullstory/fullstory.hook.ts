@@ -1,19 +1,14 @@
-import { identify, init } from '@fullstory/browser';
+import {
+  anonymize,
+  identify,
+  init,
+  restart,
+  shutdown,
+} from '@fullstory/browser';
 import { useEffect } from 'react';
-
-interface Props {
-  readonly debug: boolean | undefined;
-  readonly devMode: boolean | undefined;
-  readonly host: string | undefined;
-  readonly namespace: string | undefined;
-  readonly orgId: string;
-  readonly recordCrossDomainIFrames: boolean | undefined;
-  readonly recordOnlyThisIFrame: boolean | undefined;
-  readonly script: string | undefined;
-  readonly userDisplayName: string | undefined;
-  readonly userEmail: string | undefined;
-  readonly userUid: number | string | undefined;
-}
+import type IdentifyProps from '../../types/identify-props';
+import type InitProps from '../../types/init-props';
+import isFullStoryInitialized from '../../utils/is-fullstory-initialized';
 
 export default function useFullStory({
   debug,
@@ -27,8 +22,16 @@ export default function useFullStory({
   userDisplayName,
   userEmail,
   userUid,
-}: Props): void {
-  useEffect((): void => {
+}: IdentifyProps & InitProps): void {
+  useEffect((): VoidFunction => {
+    if (isFullStoryInitialized()) {
+      restart();
+
+      return (): void => {
+        shutdown();
+      };
+    }
+
     init({
       debug,
       devMode,
@@ -39,6 +42,10 @@ export default function useFullStory({
       recordOnlyThisIFrame,
       script,
     });
+
+    return (): void => {
+      shutdown();
+    };
   }, [
     debug,
     devMode,
@@ -50,7 +57,7 @@ export default function useFullStory({
     script,
   ]);
 
-  useEffect((): void => {
+  useEffect((): VoidFunction | undefined => {
     if (typeof userUid === 'undefined') {
       return;
     }
@@ -59,5 +66,9 @@ export default function useFullStory({
       displayName: userDisplayName,
       email: userEmail,
     });
+
+    return (): void => {
+      anonymize();
+    };
   }, [userDisplayName, userEmail, userUid]);
 }

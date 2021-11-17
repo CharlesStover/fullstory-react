@@ -1,1 +1,1 @@
-export { default } from './fullstory-exclude.root.view';
+export { default } from './fullstory-exclude.view';
