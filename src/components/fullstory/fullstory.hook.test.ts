@@ -96,14 +96,42 @@ describe('useFullStory', (): void => {
     expect(TEST_SHUTDOWN).toHaveBeenLastCalledWith();
   });
 
+  it('should anonymize if no user ID', (): void => {
+    renderHook(useFullStory, {
+      initialProps: {
+        ...TEST_IDENTIFY_PROPS,
+        ...TEST_INIT_PROPS,
+        devMode: false,
+      },
+    });
+    expect(TEST_ANONYMIZE).toHaveBeenCalledTimes(ONCE);
+    expect(TEST_ANONYMIZE).toHaveBeenLastCalledWith();
+    expect(TEST_IDENTIFY).not.toHaveBeenCalled();
+  });
+
+  it('should anonymize in dev mode', (): void => {
+    renderHook(useFullStory, {
+      initialProps: {
+        ...TEST_DEFINED_IDENTIFY_PROPS,
+        ...TEST_INIT_PROPS,
+        devMode: true,
+      },
+    });
+    expect(TEST_ANONYMIZE).toHaveBeenCalledTimes(ONCE);
+    expect(TEST_ANONYMIZE).toHaveBeenLastCalledWith();
+    expect(TEST_IDENTIFY).not.toHaveBeenCalled();
+  });
+
   it('should identify', (): void => {
     renderHook(useFullStory, {
       initialProps: {
         ...TEST_DEFINED_IDENTIFY_PROPS,
         ...TEST_INIT_PROPS,
+        devMode: false,
       },
     });
 
+    expect(TEST_ANONYMIZE).not.toHaveBeenCalled();
     expect(TEST_IDENTIFY).toHaveBeenCalledTimes(ONCE);
     expect(TEST_IDENTIFY).toHaveBeenLastCalledWith(TEST_UID, {
       displayName: TEST_DISPLAY_NAME,
@@ -116,8 +144,11 @@ describe('useFullStory', (): void => {
       initialProps: {
         ...TEST_DEFINED_IDENTIFY_PROPS,
         ...TEST_INIT_PROPS,
+        devMode: false,
       },
     });
+    
+    expect(TEST_ANONYMIZE).not.toHaveBeenCalled();
 
     unmount();
 
