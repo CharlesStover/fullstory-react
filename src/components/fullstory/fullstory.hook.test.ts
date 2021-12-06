@@ -147,7 +147,7 @@ describe('useFullStory', (): void => {
         devMode: false,
       },
     });
-    
+
     expect(TEST_ANONYMIZE).not.toHaveBeenCalled();
 
     unmount();
