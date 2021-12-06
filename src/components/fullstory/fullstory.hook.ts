@@ -58,7 +58,8 @@ export default function useFullStory({
   ]);
 
   useEffect((): VoidFunction | undefined => {
-    if (typeof userUid === 'undefined') {
+    if (typeof userUid === 'undefined' || devMode === true) {
+      anonymize();
       return;
     }
 
@@ -70,5 +71,5 @@ export default function useFullStory({
     return (): void => {
       anonymize();
     };
-  }, [userDisplayName, userEmail, userUid]);
+  }, [devMode, userDisplayName, userEmail, userUid]);
 }
